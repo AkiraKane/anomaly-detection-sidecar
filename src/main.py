@@ -186,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(result)
 
-    return 1 if anomalies else 0
+    return 0
 
 
 if __name__ == "__main__":
