@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  anomaly-detector:
+    build: .
+    container_name: anomaly-detection-sidecar
+    volumes:
+      - ./data:/app/data
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    networks:
+      - ai-net
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai-net
+
+volumes:
+  ollama_data:
+
+networks:
+  ai-net:
+    driver: bridge
